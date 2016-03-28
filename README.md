@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rifkyfu32/Aplikasi-Kontak.svg?branch=master)](https://travis-ci.org/rifkyfu32/Aplikasi-Kontak)
+
 # Aplikasi-Kontak
 <h2>Aplikasi Kontak dengan Node.js, Express.Js, Angular.js dan MonggoDb<h2/>
 <img src="http://i1318.photobucket.com/albums/t650/rifky2fuady/Repository/Screenshot%20from%202016-03-28%20144800_zpswvuhy0pa.png" alt="screenshoot aplikasi">
