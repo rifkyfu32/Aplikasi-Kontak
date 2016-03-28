@@ -14,7 +14,7 @@ Repository ini berisi kode untuk API Aplikasi  Daftar Kontak yang dibangun mengg
 
 clone repository ini dengan  
 
-    git clone git@github.com:michaelcheng429/meanstacktutorial.git
+    git clone https://github.com/rifkyfu32/Aplikasi-Kontak.git
 
 kemudian install Node modules dengan perintah :
 
