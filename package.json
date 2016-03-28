@@ -1,0 +1,31 @@
+{
+  "name": "kontakapp",
+  "version": "1.0.0",
+  "description": "Aplikasi Kontak dengan Node.js, Express.js dan Angular.js",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rifkyfu32/Aplikasi-Kontak.git"
+  },
+  "keywords": [
+    "kontak",
+    "list",
+    "CRUD",
+    "Node.js",
+    "Angular.js",
+    "Express.js"
+  ],
+  "author": "Rifky Fuady",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rifkyfu32/Aplikasi-Kontak/issues"
+  },
+  "homepage": "https://github.com/rifkyfu32/Aplikasi-Kontak#readme"
+}
