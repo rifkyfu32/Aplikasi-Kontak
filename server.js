@@ -1,28 +1,28 @@
 /**
  * Created by rifky on 28/03/16.
  */
-var express 	= require('express'),
-	app 		= express(),
-	mongojs 	= require('mongojs'),
-	db			= mongojs('kontaklist',['kontaklist']),
-	bodyParser	= require('body-parser');
+var express   = require('express'),
+  app     = express(),
+  mongojs   = require('mongojs'),
+  db      = mongojs('kontaklist',['kontaklist']),
+  bodyParser  = require('body-parser');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 app.get('/listkontak', function (req, res) {
-	console.log('Menerima get request');
+  console.log('Menerima get request');
 
-	db.kontaklist.find(function (err,data) {
-		err ? console.log(err) : res.json(data);
-	});	
+  db.kontaklist.find(function (err,data) {
+    err ? console.log(err) : res.json(data);
+  }); 
 });
 
 app.post('/listkontak', function (req,res) {
-	console.log(req.body);
-	db.kontaklist.insert(req.body, function (err,data) {
-		err ? console.log(err) : res.json(data);
-	});
+  console.log(req.body);
+  db.kontaklist.insert(req.body, function (err,data) {
+    err ? console.log(err) : res.json(data);
+  });
 });
 app.delete('/listkontak/:id', function (req, res) {
   var id = req.params.id;
@@ -53,3 +53,5 @@ app.put('/listkontak/:id', function (req, res) {
 });
 app.listen(6969);
 console.log('Server berjalan di http://localhost:6969/');
+
+module.exports = app;

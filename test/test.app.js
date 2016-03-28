@@ -7,7 +7,7 @@ var	mocha	= require('mocha'),
 	assert	= require('assert'),
 	app		= require('../server'),
 	mongojs	= require('mongojs'),
-	db		= mongojs(kontaklist,[kontaklist]);
+	db		= mongojs('kontaklist',['kontaklist']);
 
 describe('Test	REST API', function(){
  	describe('GET /listkontak', function(){
@@ -19,7 +19,7 @@ describe('Test	REST API', function(){
  			.expect(function(res){
  				db.kontaklist.find(function (data) {
  					assert.equal(res.body.message,	data);
-				});
+				})
  			})
  			.end(function(err,	res){
  				if(err)	return	done(err)
