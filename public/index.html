@@ -6,13 +6,14 @@
 </head>
 <body ng-app="kontakApp">
 	<div class="container" ng-controller="appCtrl">
-		<nav class="navbar navbar-inverse navbar-static-top">			
+			
+		
+		<nav class="navbar navbar-inverse navbar-static-top">						
+			<div class="col-xs-8 col-sm-8 col-xs-offset-2 col-sm-offset-2 ">				
 			<div class="navbar-brand">Aplikasi Kontak</div>
-			
-			<p class="navbar-text navbar-right">&nbsp</p>
 			<input class="navbar-form navbar-right form-control" placeholder="Cari" ng-model="q"/>
+			</div>
 		</nav>
-			
 		<div class="col-sm-12 col-md-12 col-lg-12">
 		<table class="table table-responsive">
 			<thead>

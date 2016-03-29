@@ -1,55 +1,98 @@
 /**
  * Created by rifky on 28/03/16.
 */
-
 var	mocha	= require('mocha'),
 	request	= require('supertest'),
-	assert	= require('assert'),
 	app		= require('../server'),
-	mongojs	= require('mongojs'),
-	db		= mongojs('kontaklist',['kontaklist']);
+	expect = require('expect.js');
 
 describe('Test	REST API Aplikasi-Kontak', function(){
 
-	var id
+	var id	
 	
-	it('POST /listkontak harus dapat menginput data ke database', function(done){
+	it('POST /listkontak post object', function(done){
 		request(app).post('/listkontak')
-		.send({ nama: 'fu', email: 'fu@gmail.com', telp: '0877-0000-1111'})
- 		.set('Accept',	'application/json')
- 		.expect('Content-Type',	/json/)
- 		.expect(200)
- 		.expect(function(req,res){
- 			db.kontaklist.insert(req.body,function (data) {
- 				assert.equal(typeof req.body._id, 'object')
- 				assert.equal(res.body.length, 1)
- 				assert.equal(res.body._id.length, 24)
- 				assert.equal(res.body, data)
- 				id = res.body[0]._id
+			.send({ nama: 'Fu', email: 'fu@gmail.com', telp: '0800-0000-000'})
+			.end(function(e,res){
+				console.log(res.body)
+				id = res.body._id
+				expect(e).to.eql(null)
+				expect(Object.keys(res.body).length).to.eql(4)
+				expect(res.body._id.length).to.eql(24)
+				done() 
 			})
-		})
-		.end(function(err,	res){
-			if(err)	return	done(err)
+	})
+
+	it('GET /listkontak/:id menerima object', function(done){
+		request(app).get('/listkontak/'+id)
+			.set('Accept',	'application/json')
+ 			.expect('Content-Type',	/json/)
+ 			.expect(200)
+			.end(function(e, res){
+				console.log(res.body)
+				expect(e).to.eql(null)
+				expect(typeof res.body).to.eql('object')
+				expect(Object.keys(res.body).length).to.eql(4)
+				expect(res.body._id.length).to.eql(24)
+				expect(res.body._id).to.eql(id)
 				done()
 			})
 	})
 
-	it('GET /listkontak harus me-return data json semua kontaklist dari database', function(done){
+	it('GET /listkontak menerima semua daftar kontak ', function(done){
 		request(app).get('/listkontak')
- 		.set('Accept',	'application/json')
- 		.expect('Content-Type',	/json/)
- 		.expect(200)
- 		.expect(function(res){
- 				db.kontaklist.find(function (data) {
- 					assert.equal(res.body,	data);
-				})
- 		})
-		.end(function(err,	res){
-			if(err)	return	done(err)
+			.set('Accept',	'application/json')
+ 			.expect('Content-Type',	/json/)
+ 			.expect(200)
+			.end(function(e, res){
+				console.log(res.body)
+				expect(e).to.eql(null)
+				expect(Object.keys(res.body).length).to.be.above(0)
+				expect(res.body.map(function (item){return item._id})).to.contain(id)
 				done()
 			})
 	})
 
+	it('PUT /listkontak/:id mengupdate object', function(done){
+		request(app).put('/listkontak/'+id)
+			.send({nama: 'Nova', email: 'nov@yahoo.com', telp: '0877-3340-1711'})
+			.end(function(e, res){
+				console.log(res.body)
+				expect(e).to.eql(null)
+				expect(typeof res.body).to.eql('object')
+				expect(Object.keys(res.body).length).to.eql(4)
+				done()
+			})
+	})
+
+	it('GET /listkontak/:id ceck update object', function(done){
+		request(app).get('/listkontak/'+id)
+			.set('Accept',	'application/json')
+ 			.expect('Content-Type',	/json/)
+ 			.expect(200)
+			.end(function(e, res){
+				console.log(res.body)
+				expect(e).to.eql(null)
+				expect(typeof res.body).to.eql('object')
+				expect(res.body._id.length).to.eql(24)
+				expect(res.body._id).to.eql(id)
+				expect(res.body.nama).to.eql('Nova')
+				done()
+			})
+	})
+	
+	it('DELETE /listkontak/:id menghapus object', function(done){
+		request(app).del('/listkontak/'+id)
+			.end(function(e, res){
+				console.log(res.body)
+				expect(e).to.eql(null)
+				expect(typeof res.body).to.eql('object')
+				expect(Object.keys(res.body).length).to.eql(2)
+				expect(res.body.ok).to.eql(1)
+				expect(res.body.n).to.eql(1)
+				done()
+			})
+	})
 	
 
 })
