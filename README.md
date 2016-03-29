@@ -2,7 +2,7 @@
 
 # Aplikasi-Kontak
 <h2>Aplikasi Kontak dengan Node.js, Express.Js, Angular.js dan MonggoDb<h2/>
-<img src="http://i1318.photobucket.com/albums/t650/rifky2fuady/Repository/Screenshot%20from%202016-03-28%20144800_zpswvuhy0pa.png" alt="screenshoot aplikasi">
+<img src="http://i1318.photobucket.com/albums/t650/rifky2fuady/Repository/Screenshot%20from%202016-03-29%20111437_zpsnqt4pmgw.png" alt="screenshoot aplikasi">
 
 Repository ini berisi kode untuk API Aplikasi  Daftar Kontak yang dibangun menggunakan :
 <ul>
