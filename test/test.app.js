@@ -93,6 +93,18 @@ describe('Test	REST API Aplikasi-Kontak', function(){
 				done()
 			})
 	})
+
+	it('GET /random url, Jika halaman tidak diketemukan', function(done){
+		request(app).get('/random')
+			.expect(404)
+		    .end(function(e,res){
+		    	console.log(res.text)
+		    	expect(res.statusCode).to.eql(404)
+		    	expect(res.status).to.eql(404)
+		    	expect(res.text).to.eql('Maaf halaman yang anda cari tidak ditemukan')
+		      	done()
+		    })
+	})
 	
 
 })

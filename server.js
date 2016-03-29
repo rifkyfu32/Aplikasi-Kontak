@@ -49,6 +49,10 @@ app.put('/listkontak/:id', function (req, res) {
   );
 });
 
+app.use(function(req, res, next) {
+  res.status(404).send('Maaf halaman yang anda cari tidak ditemukan');
+});
+
 app.listen(6969);
 console.log('Server berjalan di http://localhost:6969/');
 
