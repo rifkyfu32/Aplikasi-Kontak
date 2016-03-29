@@ -6,35 +6,47 @@
 </head>
 <body ng-app="kontakApp">
 	<div class="container" ng-controller="appCtrl">
-		<h2>Aplikasi Kontak</h2>
-		<table class="table">
+		<nav class="navbar navbar-inverse navbar-static-top">			
+			<div class="navbar-brand">Aplikasi Kontak</div>
+			
+			<p class="navbar-text navbar-right">&nbsp</p>
+			<input class="navbar-form navbar-right form-control" placeholder="Cari" ng-model="q"/>
+		</nav>
+			
+		<div class="col-sm-12 col-md-12 col-lg-12">
+		<table class="table table-responsive">
 			<thead>
-				<tr>					
+				<tr >					
 					<th>Nama</th>
 					<th>Email</th>
 					<th>No. Telp</th>
-					<th colspan="3">Aksi</th>
+					<th colspan="3" class="text-center">Aksi</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody>				
+				<tr ng-repeat="kontak in (results = (listkontak | filter:q))">
+					<td> {{kontak.nama}} </td>
+					<td> {{kontak.email}} </td>
+					<td> {{kontak.telp}} </td>
+					<td><button class="btn btn-danger" ng-click="hapusKontak(kontak._id)">Hapus</button></td>
+					<td>&nbsp</td>
+					<td><button class="btn btn-warning" ng-click="editKontak(kontak._id)">Edit</button></td>
+				</tr>
+				<tr ng-if="results.length == 0">
+					<td colspan="6" class="text-center"><h4>Hasil tidak ditemukan</h4></td>
+				</tr>
 				<tr>
 					<td> <input class="form-control" ng-model="kontak.nama"/> </td>
 					<td> <input class="form-control" ng-model="kontak.email"/> </td>
 					<td> <input class="form-control" ng-model="kontak.telp"/> </td>
-					<td><button class="btn btn-primary" ng-click="tambahKontak()">Tambah</button></td>
-					<td><button class="btn btn-info" ng-click="ubahKontak()">Ubah</button></td>
-					<td><button class="btn btn-info" ng-click="bersih()">Bersih</button></td>
+					<td><button class="btn btn-primary tambah" ng-click="tambahKontak()">Tambah</button></td>
+					<td><button class="btn btn-info ubah" ng-click="ubahKontak()">Ubah</button></td>
+					<td><button class="btn btn-success" ng-click="bersih()">Bersih</button></td>
       
-				</tr>
-				<tr ng-repeat="kontak in listkontak">
-					<td> {{kontak.nama}} </td>
-					<td> {{kontak.email}} </td>
-					<td> {{kontak.telp}} </td>
-					<td><button class="btn btn-danger" ng-click="hapus(kontak._id)">Hapus</button></td>
-					<td colspan="2"><button class="btn btn-warning" ng-click="edit(kontak._id)">Edit</button></td>
 				</tr>
 			</tbody>
 		</table>
+		</div>
 	</div>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/angular.min.js"></script>

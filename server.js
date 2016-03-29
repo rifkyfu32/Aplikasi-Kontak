@@ -5,52 +5,50 @@ var express   = require('express'),
   app     = express(),
   mongojs   = require('mongojs'),
   db      = mongojs('kontaklist',['kontaklist']),
-  bodyParser  = require('body-parser');
+  bodyParser  = require('body-parser'),
+  favicon = require('serve-favicon');
 
 app.use(express.static(__dirname + "/public"));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 
 app.get('/listkontak', function (req, res) {
-  console.log('Menerima get request');
-
   db.kontaklist.find(function (err,data) {
     err ? console.log(err) : res.json(data);
   }); 
 });
 
 app.post('/listkontak', function (req,res) {
-  console.log(req.body);
   db.kontaklist.insert(req.body, function (err,data) {
     err ? console.log(err) : res.json(data);
   });
 });
+
 app.delete('/listkontak/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
-  db.kontaklist.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
-    res.json(doc);
+  db.kontaklist.remove({_id: mongojs.ObjectId(id)}, function (err, data) {
+    err ? console.log(err) : res.json(data);
   });
 });
 
 app.get('/listkontak/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
-  db.kontaklist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
-    res.json(doc);
+  db.kontaklist.findOne({_id: mongojs.ObjectId(id)}, function (err, data) {
+    err ? console.log(err) : res.json(data);
   });
 });
 
 app.put('/listkontak/:id', function (req, res) {
   var id = req.params.id;
-  console.log(req.body.name);
   db.kontaklist.findAndModify({
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number}},
-    new: true}, function (err, doc) {
-      res.json(doc);
+    update: {$set: {nama: req.body.nama, email: req.body.email, telp: req.body.telp}},
+    new: true}, function (err, data) {
+      err ? console.log(err) : res.json(data);
     }
   );
 });
+
 app.listen(6969);
 console.log('Server berjalan di http://localhost:6969/');
 
